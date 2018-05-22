@@ -8,7 +8,7 @@
         <h3>欢迎来到后台管理系统</h3>
         <div class="head">
           <div class="pic">
-            <img src="" alt="">
+            <img src="../assets/img/a1.png" alt="">
           </div>
           <el-button type="text" @click="open6" class="name">Box</el-button>
         </div>
@@ -134,7 +134,7 @@
         font-weight: 600;
         color: #fff;
       }
-      .text{
+      .text {
         display: flex;
         justify-content: flex-end;
         .head {
@@ -142,11 +142,14 @@
           justify-content: flex-end;
           align-items: center;
           .pic {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             margin-left: 10px;
+            background: #fff;
+            overflow: hidden;
             img {
+              margin-top: 4px;
               width: 100%;
             }
           }
