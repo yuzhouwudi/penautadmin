@@ -98,13 +98,12 @@
             type: 'success',
             message: '退出成功!'
           });
-        })
-//          .catch(() => {
+        }).catch(() => {
 //          this.$message({
 //            type: 'info',
 //            message: '已取消删除'
 //          });
-//        });
+        });
       }
     },
     created(){
@@ -141,6 +140,7 @@
           display: flex;
           justify-content: flex-end;
           align-items: center;
+          margin-left: 15px;
           .pic {
             width: 40px;
             height: 40px;
@@ -156,7 +156,7 @@
           .name {
             font-size: 20px;
             color: #fff;
-            margin-left: 10px;
+            margin-left: 15px;
 
           }
         }
