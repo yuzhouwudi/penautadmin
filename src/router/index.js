@@ -15,10 +15,7 @@ export default new Router({
       name: 'main',
       component: Main,
         children:[
-            {
-              path:"/login",
-                component:Login,
-            },
+
             {
                 path:"/goods",
                 component:G,
@@ -32,6 +29,10 @@ export default new Router({
                 component:O,
             },
         ]
-    }
+    },
+      {
+          path:"/login",
+          component:Login,
+      },
   ]
 })

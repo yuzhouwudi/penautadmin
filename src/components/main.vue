@@ -17,11 +17,11 @@
         data(){
             return {}
         },
-        created(){
-            this.$http.get('/api/main').then(response => {
-                console.log(response);
-            })
-        }
+//        created(){
+//            this.$http.get('/api/main').then(response => {
+//                console.log(response);
+//            })
+//        }
     }
 </script>
 
