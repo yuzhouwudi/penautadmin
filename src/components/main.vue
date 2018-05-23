@@ -10,7 +10,7 @@
           <div class="pic">
             <img src="../assets/img/a1.png" alt="">
           </div>
-          <el-button type="text" @click="open6" class="name">Box</el-button>
+          <el-button type="text" @click="open6" class="name">{{name}}</el-button>
         </div>
       </div>
 
@@ -81,7 +81,8 @@
     data(){
       return {
         activeIndex: '1',
-        activeIndex2: '1'
+        activeIndex2: '1',
+        name:''
       }
     },
     methods: {
@@ -101,25 +102,45 @@
           type: 'warning',
           center: true
         }).then(() => {
+          this.$http.get('/api/admin/manager/clear').then(res => {
+            if(res.body=='edit'){
+                this.$router.push('/login')
+            }
+          })
+
           this.$message({
             type: 'success',
             message: '退出成功!'
           });
-        })
-//          .catch(() => {
+
+
+
+        }).catch(() => {
 //          this.$message({
 //            type: 'info',
 //            message: '已取消删除'
 //          });
-//        });
+        });
       }
     },
     created(){
-//            this.$http.get('/api/main').then(response => {
-//                console.log(response);
+//            this.$http.get('/api/main').then(res => {
+//                console.log(res);
 //            })
 
 
+    },
+    beforeRouteEnter(to, from, next){
+      next(vm=>{
+        vm.$http.get('/api/admin/manager/').then(res => {
+          if(res.body=='no'){
+            vm.$message.error('请先登录')
+            vm.$router.push('/login')
+          }else{
+              vm.name=res.body
+          }
+        })
+      })
     }
   }
 </script>
@@ -148,6 +169,7 @@
           display: flex;
           justify-content: flex-end;
           align-items: center;
+          margin-left: 15px;
           .pic {
             width: 40px;
             height: 40px;
@@ -163,7 +185,7 @@
           .name {
             font-size: 20px;
             color: #fff;
-            margin-left: 10px;
+            margin-left: 15px;
 
           }
         }
