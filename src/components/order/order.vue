@@ -11,7 +11,7 @@
         width="180">
         <template slot-scope="scope">
 
-          <span style="margin-left: 10px">{{ scope.row.pid }}</span>
+          <span style="margin-left: 10px">{{ scope.row.uid }}</span>
         </template>
       </el-table-column>
 

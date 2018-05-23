@@ -15,6 +15,7 @@
       </div>
 
     </el-header>
+
     <el-container>
       <el-aside class="aside" width="250px">
         <el-col>
@@ -27,43 +28,51 @@
           <el-menu
             default-active="2"
             class="el-menu-vertical-demo"
-            @open="handleOpen"
-            @close="handleClose"
             background-color="#545c64"
             text-color="#fff"
             active-text-color="#ffd04b">
-            <!--<el-submenu index="1" >-->
-            <!--<template slot="title">-->
-            <!--<i class="el-icon-menu"></i>-->
-            <!--<span>产品管理</span>-->
-            <!--</template>-->
+
             <el-menu-item index="1">
+              <i class="el-icon-tickets"></i>
+              <span slot="title" @click="user">用户信息</span>
+            </el-menu-item>
+
+            <el-menu-item index="2">
               <i class="el-icon-menu"></i>
               <span slot="title">产品管理</span>
             </el-menu-item>
-            <el-menu-item-group>
-              <template slot="title">产品分类</template>
-              <el-menu-item index="1-1">选项1</el-menu-item>
-              <el-menu-item index="1-2">选项2</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="产品分组">
-              <el-menu-item index="1-3">选项3</el-menu-item>
-            </el-menu-item-group>
-            <!--</el-submenu>-->
 
-            <el-menu-item index="2">
-              <i class="el-icon-document"></i>
-              <span slot="title">订单管理</span>
-            </el-menu-item>
+            <!--</el-submenu>-->
+            <el-submenu index="1-1">
+              <template slot="title" >产品分类</template>
+              <el-menu-item index="1-1-1" @click="relax">轻松好事</el-menu-item>
+              <el-menu-item index="1-1-2" @click="nut">酥脆坚果</el-menu-item>
+              <el-menu-item index="1-1-3" @click="travel">旅游专供</el-menu-item>
+              <el-menu-item index="1-1-4" @click="fruit">果脯好牌</el-menu-item>
+            </el-submenu>
+            <el-submenu index="1-2">
+              <template slot="title">产品分组</template>
+              <el-menu-item index="1-2-1" @click="news">上新</el-menu-item>
+              <el-menu-item index="1-2-2" @click="hot">热门</el-menu-item>
+              <el-menu-item index="1-2-3" @click="discount">折扣</el-menu-item>
+            </el-submenu>
+
+
             <el-menu-item index="3">
+              <i class="el-icon-document"></i>
+              <span slot="title" @click="list">订单管理</span>
+            </el-menu-item>
+
+            <el-menu-item index="4">
               <i class="el-icon-setting"></i>
-              <span slot="title">修改密码</span>
+              <span slot="title" @click="passedit">密码修改</span>
             </el-menu-item>
           </el-menu>
         </el-col>
       </el-aside>
 
       <el-main>
+
         <router-view></router-view>
 
       </el-main>
@@ -83,15 +92,40 @@
       }
     },
     methods: {
-      handleSelect(key, keyPath) {
-        console.log(key, keyPath);
+      user(){
+        this.$router.push('/user')
       },
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
+      nut(){
+        this.$router.push('/nut')
       },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
+      relax(){
+        this.$router.push('/relax')
       },
+      fruit(){
+        this.$router.push('/fruit')
+      },
+      travel(){
+        this.$router.push('/travel')
+      },
+
+      news(){
+        this.$router.push('/new')
+      },
+      hot(){
+        this.$router.push('/hot')
+      },
+      discount(){
+        this.$router.push('/discount')
+      },
+      list(){
+        this.$router.push('/order')
+      },
+      passedit(){
+         this.$router.push('/manager')
+      },
+
+
+
       open6() {
         this.$confirm('是否退出本系统', '提示', {
           confirmButtonText: '确定',
@@ -110,9 +144,6 @@
             message: '退出成功!',
             showClose:true
           });
-
-
-
         }).catch(() => {
 //          this.$message({
 //            type: 'info',

@@ -48,7 +48,7 @@
       }
     },
     created(){
-      this.$http.get('/api/admin/goods/display').then(res=>{
+      this.$http.get('/api/admin/goods/nut').then(res=>{
         this.arr=res.body;
       })
     }
