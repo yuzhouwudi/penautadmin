@@ -71,7 +71,8 @@
           } else {
             this.$message({
               message: '登陆成功',
-              type: 'success'
+              type: 'success',
+              center:true
             });
             this.$router.push('/')
           }

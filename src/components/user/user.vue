@@ -3,25 +3,22 @@
     :data="arr"
     style="width: 100%">
 
+
     <el-table-column
-      label="姓名"
+      label="昵称/账号"
       width="180">
       <template slot-scope="scope">
-        <el-popover trigger="hover" placement="top">
-          <p>姓名: {{ scope.row.name }}</p>
-          <p>价格: {{ scope.row.price }}</p>
-          <div slot="reference" class="name-wrapper">
-            <el-tag size="medium">{{ scope.row.name }}</el-tag>
-          </div>
-        </el-popover>
+
+        <span style="margin-left: 10px">{{ scope.row.name }}</span>
       </template>
     </el-table-column>
+
     <el-table-column
-      label="库存"
+      label="密码"
       width="180">
       <template slot-scope="scope">
-        <i class="el-icon-goods"></i>
-        <span style="margin-left: 10px">{{ scope.row.count }}</span>
+
+        <span style="margin-left: 10px">{{ scope.row.password }}</span>
       </template>
     </el-table-column>
     <el-table-column label="操作">
@@ -45,13 +42,16 @@
   export default {
     data(){
       return {
-        arr: []
+        arr: [],
       }
     },
     created(){
-      this.$http.get('/api/admin/goods/display').then(res => {
+
+      this.$http.get('/api/admin/user/display').then(res => {
         this.arr = res.body;
+//                console.log(this.arr)
       })
+
     }
   }
 </script>
