@@ -34,7 +34,7 @@
           name="pass"
           clearable>
         </el-input>
-        <img src="/api/admin/manager/code" alt="" class="codepic"
+        <img src="/api/admin/login/code" alt="" class="codepic"
              onclick="this.src='/api/admin/manager/code?'+Math.random()">
       </div>
       <el-button size="mini" type="submit" @click="check">提交</el-button>
@@ -60,16 +60,19 @@
         obj.user = this.input10
         obj.pass = this.input11
         obj.code = this.input12
-        this.$http.post('/api/admin/manager/check', obj, {
+        this.$http.post('/api/admin/login/check', obj, {
           headers: {
             "content-type": 'application/json'
           }
         }).then(res => {
 //                console.log(res);
           if (res.body != 'ok') {
-            alert(res.body)
-
+            this.$message.error(res.body);
           } else {
+            this.$message({
+              message: '登陆成功',
+              type: 'success'
+            });
             this.$router.push('/')
           }
 
