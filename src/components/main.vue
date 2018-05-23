@@ -62,7 +62,14 @@
           </el-menu>
         </el-col>
       </el-aside>
-      <el-main>Main</el-main>
+      <el-main >
+        <div class="el-main">
+        <div> Main  </div>
+        <div class="router">
+          <router-view></router-view>
+        </div>
+        </div>
+      </el-main>
     </el-container>
   </el-container>
 
@@ -162,6 +169,16 @@
         }
       }
 
+    }
+    .el-main{
+      box-sizing: border-box;
+      padding-left: 20px;
+      .top{
+        font-size: 25px;
+      }
+      .router{
+        margin-top: 15px;
+      }
     }
 
     .aside {
