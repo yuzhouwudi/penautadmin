@@ -8,6 +8,8 @@ import M from '@/components/manager/manager'
 import User from '@/components/user/user'
 
 import Nut from '@/components/classify/nut'
+import Nutmod from '@/components/classify/nutmod'
+
 import Relax from '@/components/classify/relax'
 import Fruit from '@/components/classify/fruit'
 import Travel from '@/components/classify/travel'
@@ -31,6 +33,10 @@ export default new Router({
         {
           path: "nut",
           component: Nut,
+        },
+        {
+          path: "nutmod",
+          component: Nutmod,
         },
         {
           path: "relax",

@@ -32,12 +32,12 @@
             text-color="#fff"
             active-text-color="#ffd04b">
 
-            <el-menu-item index="1">
+            <el-menu-item index="2">
               <i class="el-icon-tickets"></i>
               <span slot="title" @click="user">用户信息</span>
             </el-menu-item>
 
-            <el-menu-item index="2">
+            <el-menu-item index="1">
               <i class="el-icon-menu"></i>
               <span slot="title">产品管理</span>
             </el-menu-item>
@@ -86,8 +86,6 @@
   export default {
     data(){
       return {
-        activeIndex: '1',
-        activeIndex2: '1',
         name:''
       }
     },
@@ -152,13 +150,7 @@
         });
       }
     },
-    created(){
-//            this.$http.get('/api/main').then(res => {
-//                console.log(res);
-//            })
 
-
-    },
     beforeRouteEnter(to, from, next){
       next(vm=>{
         vm.$http.get('/api/admin/manager/').then(res => {
