@@ -1,4 +1,3 @@
-
 <template>
   <div id="nut">
     <div id="title">酥脆坚果</div>
@@ -31,11 +30,13 @@
         <template slot-scope="scope">
           <el-button
             size="mini"
-            @click="handleEdit(scope.row.id)">编辑</el-button>
+            @click="handleEdit(scope.row.id)">编辑
+          </el-button>
           <el-button
             size="mini"
             type="danger"
-            @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+            @click="handleDelete(scope.row.id)">删除
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -48,25 +49,42 @@
   export default {
     data(){
       return {
-        arr:[]
+        arr: []
       }
     },
     created(){
-      this.$http.get('/api/admin/goods/nut').then(res=>{
-        this.arr=res.body;
+      this.$http.get('/api/admin/goods/nut').then(res => {
+        this.arr = res.body;
+//        console.log(res);
       })
     },
-    methods:{
+    methods: {
       handleEdit(id){
-        this.$router.push('/nutmod?id='+id)
+        this.$router.push('/nutmod?id=' + id)
+      },
+      handleDelete(id){
+        this.$http.get('/api/admin/goods/del?id=' + id).then(res => {
+          if(res.body.affectedRows===1){
+            this.$message({
+              message: '删除成功',
+              type: 'success'
+            });
+            this.$http.get('/api/admin/goods/nut').then(res => {
+              this.arr = res.body;
+            })
+          }else{
+            this.$message.error('系统错误，请稍后再试');
+          }
+
+        })
       }
     }
   }
 </script>
 
 <style scoped lang="scss">
-  #nut{
-    #title{
+  #nut {
+    #title {
       padding: 0 10px 5px;
       margin-top: -10px;
       font-size: 20px;

@@ -7,6 +7,7 @@ import M from '@/components/manager/manager'
 
 import User from '@/components/user/user'
 
+import Nutadd from '@/components/classify/nutadd'
 import Nut from '@/components/classify/nut'
 import Nutmod from '@/components/classify/nutmod'
 
@@ -30,6 +31,10 @@ export default new Router({
       redirect: '/user',
 
       children: [
+        {
+          path: "nutadd",
+          component: Nutadd,
+        },
         {
           path: "nut",
           component: Nut,

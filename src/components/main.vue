@@ -39,12 +39,12 @@
 
             <el-menu-item index="1">
               <i class="el-icon-menu"></i>
-              <span slot="title">产品管理</span>
+              <span slot="title" @click="add">产品管理</span>
             </el-menu-item>
 
             <!--</el-submenu>-->
             <el-submenu index="1-1">
-              <template slot="title" >产品分类</template>
+              <template slot="title">产品分类</template>
               <el-menu-item index="1-1-1" @click="relax">轻松好事</el-menu-item>
               <el-menu-item index="1-1-2" @click="nut">酥脆坚果</el-menu-item>
               <el-menu-item index="1-1-3" @click="travel">旅游专供</el-menu-item>
@@ -86,7 +86,7 @@
   export default {
     data(){
       return {
-        name:''
+        name: ''
       }
     },
     methods: {
@@ -119,10 +119,12 @@
         this.$router.push('/order')
       },
       passedit(){
-         this.$router.push('/manager')
+        this.$router.push('/manager')
       },
 
-
+      add(){
+        this.$router.push('/nutadd')
+      },
 
       open6() {
         this.$confirm('是否退出本系统', '提示', {
@@ -132,15 +134,15 @@
           center: true
         }).then(() => {
           this.$http.get('/api/admin/manager/clear').then(res => {
-            if(res.body=='edit'){
-                this.$router.push('/login')
+            if (res.body == 'edit') {
+              this.$router.push('/login')
             }
           })
 
           this.$message({
             type: 'success',
             message: '退出成功!',
-            showClose:true
+            showClose: true
           });
         }).catch(() => {
 //          this.$message({
@@ -152,13 +154,13 @@
     },
 
     beforeRouteEnter(to, from, next){
-      next(vm=>{
+      next(vm => {
         vm.$http.get('/api/admin/manager/').then(res => {
-          if(res.body=='no'){
+          if (res.body == 'no') {
             vm.$message.error('请先登录')
             vm.$router.push('/login')
-          }else{
-              vm.name=res.body
+          } else {
+            vm.name = res.body
           }
         })
       })
@@ -213,13 +215,13 @@
       }
 
     }
-    .el-main{
+    .el-main {
       box-sizing: border-box;
       padding-left: 20px;
-      .top{
+      .top {
         font-size: 25px;
       }
-      .router{
+      .router {
         margin-top: 15px;
       }
     }

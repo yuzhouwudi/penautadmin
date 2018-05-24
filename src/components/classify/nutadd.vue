@@ -1,11 +1,7 @@
 <template>
-  <div id="nutmod">
+  <div id="nutadd">
     <div id="title">
-      <el-breadcrumb separator-class="el-icon-arrow-right">
-        <el-breadcrumb-item>产品管理</el-breadcrumb-item>
-        <el-breadcrumb-item :to="{ path: '/nut' }">酥脆坚果</el-breadcrumb-item>
-        <el-breadcrumb-item>产品详情修改</el-breadcrumb-item>
-      </el-breadcrumb>
+      产品新增
     </div>
     <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
       <el-form-item label="产品名称" prop="name">
@@ -39,7 +35,7 @@
 
       <el-form-item label="产品分组" prop="rid">
         <el-checkbox-group v-model="ruleForm.rid">
-          <el-checkbox :label="item.id" name="type" v-for="item in recom" :key="item.id">{{item.name}}</el-checkbox>
+          <el-checkbox :label="item.id" name="type"  v-for="item in recom" :key="item.id">{{item.name}}</el-checkbox>
         </el-checkbox-group>
       </el-form-item>
       <el-form-item label="是否包邮" prop="contfree">
@@ -76,7 +72,7 @@
 </template>
 <script>
   export default{
-    name: 'nutmod',
+    name: 'nutadd',
     data(){
       return {
         ruleForm: {
@@ -92,7 +88,7 @@
         },
 
         fenlei: [],
-        recom: []
+        recom:[]
         ,
         rules: {
           name: [
@@ -127,33 +123,33 @@
     }
     ,
     methods: {
-      validate(bool, obj)
-      {
-        console.log(bool, obj)
-      },
       submitForm(formName)
       {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            let id = this.$route.query.id
+
             let obj = Object.assign({}, this.ruleForm)
             obj.img = JSON.stringify(obj.img)
             obj.rid=JSON.stringify(obj.rid)
             obj.time = JSON.stringify(obj.time).slice(1,11)
-            this.$http.post('/api/admin/goods/upd?id='+id, obj, {
+
+            this.$http.post('/api/admin/goods/add', obj, {
               headers: {
                 "content-type": "application/json"
               }
-            }).then((res) =>{
+            }).then((res)=> {
               if(res.body=='ok'){
                 this.$message({
-                  message: '修改成功',
+                  message: '添加成功',
                   type: 'success'
                 });
+                this.$refs[formName].resetFields();
               }else{
-                this.$message.error('系统错误');
+                this.$message.error('错了哦,请重新添加');
               }
             })
+
+
           } else {
             this.$message({
               message: '数据不全，请补充完整',
@@ -163,6 +159,7 @@
           }
         });
 
+
       }
       ,
       resetForm(formName)
@@ -171,6 +168,7 @@
       },
 
       handleRemove(file, filelist) {
+
         this.ruleForm.img = filelist;
       },
       handleSuccess(res, file, filelist) {
@@ -181,24 +179,9 @@
     ,
     created()
     {
-      let id = this.$route.query.id
-      this.$http.get('/api/admin/goods/nutmod?id=' + id).then(res => {
-//        console.log(res);
-        let body = res.body[0]
-        if(body.rid) {
-          body.rid = JSON.parse(body.rid)
-          if (body.img) {
-            body.img = JSON.parse(body.img)
-          }
-        }
-
-        this.ruleForm = body
-//        console.log(this.ruleForm);
-      })
       this.$http.get('/api/admin/goods/nutfenlei').then(res => {
 //        console.log(res);
         this.fenlei = res.body
-
 
       })
       this.$http.get('/api/admin/goods/nutrecom').then(res => {
@@ -211,16 +194,12 @@
   }
 </script>
 <style scoped lang='scss'>
-  #nutmod {
+  #nutadd {
     #title {
-      padding: 0 10px 35px;
-      margin-top: 0;
+      padding: 0 10px 20px;
+      margin-top: -10px;
       font-size: 20px;
       font-weight: 600;
-    }
-    .upload-demo {
-      width: 400px;
-      overflow: hidden;
     }
   }
 </style>
