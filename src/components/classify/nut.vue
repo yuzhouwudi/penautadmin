@@ -2,7 +2,7 @@
   <div id="nut">
     <div id="title">酥脆坚果</div>
     <el-table
-      :data="arr"
+      :data="list"
       style="width: 100%">
 
       <el-table-column
@@ -40,6 +40,17 @@
         </template>
       </el-table-column>
     </el-table>
+
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage1"
+      :page-sizes="[2, 4, 6, 8]"
+      :page-size="2"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="arr.length">
+    </el-pagination>
+
   </div>
 
 </template>
@@ -49,12 +60,18 @@
   export default {
     data(){
       return {
-        arr: []
+        arr: [],
+        list:[],
+
+        currentPage1: 1,
+
       }
     },
     created(){
       this.$http.get('/api/admin/goods/nut').then(res => {
         this.arr = res.body;
+        this.list=this.arr.slice(0,2)
+//        console.log(this.list);
 //        console.log(res);
       })
     },
@@ -77,6 +94,13 @@
           }
 
         })
+      },
+
+      handleSizeChange(val) {
+        console.log(`每页 ${val} 条`);
+      },
+      handleCurrentChange(val) {
+
       }
     }
   }
