@@ -4,7 +4,7 @@
     <div id="title">用户信息</div>
     <el-table
       :data="arr"
-      style="width: 100%"
+      style="width: 365px"
       :default-sort = "{prop: 'date', order: 'descending'}"
     >
       <el-table-column

@@ -2,7 +2,7 @@
   <div id="nut">
     <div id="title">酥脆坚果</div>
     <el-table
-      :data="list"
+      :data="arr"
       style="width: 100%">
 
       <el-table-column
@@ -25,6 +25,10 @@
           <i class="el-icon-goods"></i>
           <span style="margin-left: 10px">{{ scope.row.count }}</span>
         </template>
+        <template slot-scope="scope">
+          <i class="el-icon-goods"></i>
+          <span style="margin-left: 10px">{{ scope.row.id }}</span>
+        </template>
       </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
@@ -39,16 +43,16 @@
           </el-button>
         </template>
       </el-table-column>
+
     </el-table>
 
     <el-pagination
-      @size-change="handleSizeChange"
+      class="page"
       @current-change="handleCurrentChange"
-      :current-page="currentPage1"
-      :page-sizes="[2, 4, 6, 8]"
-      :page-size="2"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="arr.length">
+      :current-page="currentPage"
+      :page-size="size"
+      layout="total , prev, pager, next, jumper"
+      :total="total">
     </el-pagination>
 
   </div>
@@ -61,17 +65,19 @@
     data(){
       return {
         arr: [],
-        list:[],
-
-        currentPage1: 1,
-
+        total: 0,
+        currentPage: 1,
+        size:7
       }
     },
     created(){
-      this.$http.get('/api/admin/goods/nut').then(res => {
+      this.$http.get('/api/admin/goods/count?id=2').then(res => {
+        this.total = res.body[0].total;
+        console.log(res);
+      })
+
+      this.$http.get('/api/admin/goods/nut?id=2&nub=1&size='+this.size).then(res => {
         this.arr = res.body;
-        this.list=this.arr.slice(0,2)
-//        console.log(this.list);
 //        console.log(res);
       })
     },
@@ -81,27 +87,33 @@
       },
       handleDelete(id){
         this.$http.get('/api/admin/goods/del?id=' + id).then(res => {
-          if(res.body.affectedRows===1){
+          if (res.body.affectedRows === 1) {
             this.$message({
               message: '删除成功',
               type: 'success'
             });
-            this.$http.get('/api/admin/goods/nut').then(res => {
+            this.$http.get('/api/admin/goods/nut?id=2&nub='+this.currentPage+'&size='+this.size).then(res => {
               this.arr = res.body;
+//        console.log(res);
             })
-          }else{
+          } else {
             this.$message.error('系统错误，请稍后再试');
           }
 
         })
       },
 
-      handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
-      },
+
       handleCurrentChange(val) {
+        this.currentPage = val
+
+        this.$http.get('/api/admin/goods/nut?id=2&nub=' + val+'&size='+this.size).then(res => {
+          this.arr = res.body;
+//          console.log(res,this.arr);
+        })
 
       }
+
     }
   }
 </script>
@@ -113,6 +125,12 @@
       margin-top: -10px;
       font-size: 20px;
       font-weight: 600;
+    }
+    .page {
+      position: fixed;
+      bottom: 50px;
+      right: 50px;
+      z-index: 100;
     }
   }
 </style>
