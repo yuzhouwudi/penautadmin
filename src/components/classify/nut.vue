@@ -73,7 +73,7 @@
     created(){
       this.$http.get('/api/admin/goods/count?id=2').then(res => {
         this.total = res.body[0].total;
-        console.log(res);
+//        console.log(res);
       })
 
       this.$http.get('/api/admin/goods/nut?id=2&nub=1&size='+this.size).then(res => {
@@ -106,7 +106,6 @@
 
       handleCurrentChange(val) {
         this.currentPage = val
-
         this.$http.get('/api/admin/goods/nut?id=2&nub=' + val+'&size='+this.size).then(res => {
           this.arr = res.body;
 //          console.log(res,this.arr);

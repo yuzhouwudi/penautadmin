@@ -4,7 +4,6 @@
     <el-table
       :data="arr"
       style="width: 100%">
-
       <el-table-column
         label="姓名"
         width="180">
@@ -65,9 +64,7 @@
         res.body.forEach(val=>{
             arr.push(JSON.parse(val))
         })
-//        this.list = this.arr.slice(0, 2)
-//        console.log(this.list);
-//        console.log(arr);
+
         this.arr=arr
       })
     },
@@ -92,16 +89,6 @@
         })
       },
 
-//      handleSizeChange(val) {
-////        console.log(`每页 ${val} 条`);
-//      },
-//      handleCurrentChange(val) {
-//
-//
-//        this.list = this.arr.slice("val", 1)
-//        console.log(val);
-//        console.log(this.list,this.arr);
-//      }
 
     }
   }
