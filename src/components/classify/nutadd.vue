@@ -11,12 +11,12 @@
       </el-form-item>
       <el-form-item label="产品单价" prop="count">
         <el-col :span="11">
-          <el-input v-model="ruleForm.count"></el-input>
+          <el-input v-model="ruleForm.price"></el-input>
         </el-col>
       </el-form-item>
       <el-form-item label="产品数量" prop="price">
         <el-col :span="11">
-          <el-input v-model="ruleForm.price"></el-input>
+          <el-input v-model="ruleForm.count"></el-input>
         </el-col>
       </el-form-item>
       <el-form-item label="产品分类" prop="fid">
