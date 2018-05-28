@@ -5,19 +5,19 @@
     style="width: 100%">
 
     <el-table-column
-      label="用户id"
+      label="昵称"
       width="180">
       <template slot-scope="scope">
-        <span style="margin-left: 10px">{{ scope.row.pid }}</span>
+        <span style="margin-left: 10px">{{ scope.row.name }}</span>
       </template>
     </el-table-column>
 
     <el-table-column
-      label="用户名"
+      label="用户"
       width="180">
       <template slot-scope="scope">
 
-        <span style="margin-left: 10px">{{ name }}</span>
+        <span style="margin-left: 10px">{{scope.row.account}}</span>
       </template>
     </el-table-column>
 
@@ -72,23 +72,36 @@
     },
     created(){
       this.$http.get('/api/admin/order/display').then(res => {
-        this.arr = res.body;
+        let brr = res.body;
+//        console.log(brr)
         this.$nextTick(function () {
-          this.$http.get('/api/admin/order/detail?pid=' + this.arr[0].pid).then(res => {
-            this.name = res.body[0].name
-          })
+            let that=this
+            brr.forEach(function (val,index) {
+                that.$http.get('/api/admin/order/detail?pid=' + val.pid).then(res => {
+//                    console.log(res);
+                    let obj={
+                        name:res.body[0].name,
+                        account:res.body[0].account,
+                        status:brr[index].status,
+                        id:brr[index].id,
+                        pid:brr[index].pid
+                    }
+                    that.arr.push(obj)
+//                    console.log(that.arr);
+                })
+            })
         })
       })
-
     },
+
+
     methods: {
       handleEdit(index, val){
         let dingdanid = val.id;
         let pid = val.pid;
         let count = val.count;
         this.$router.push(`/ordeatil?dingdanid=${dingdanid}&pid=${pid}`)
-
-      },
+  },
       Edit(a){
         if (a.status == 2) {
           a.status = 0;

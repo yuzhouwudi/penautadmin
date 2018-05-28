@@ -66,9 +66,7 @@
       this.$http.get('/api/admin/order/detail?pid=' + pid).then(res => {
         this.name = (res.body[0].name);
       })
-
-
-      this.$http.get('/api/admin/order/goods?dingdanid=1').then(res => {
+      this.$http.get('/api/admin/order/goods?dingdanid='+dingdanid).then(res => {
 
         this.$nextTick(function () {
           let that = this
