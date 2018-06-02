@@ -3,7 +3,7 @@
     <div id="title">
       <el-breadcrumb separator-class="el-icon-arrow-right">
         <el-breadcrumb-item>产品管理</el-breadcrumb-item>
-        <el-breadcrumb-item :to="{ path: '/nut' }">酥脆坚果</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/fruit' }">果脯好牌</el-breadcrumb-item>
         <el-breadcrumb-item>产品详情修改</el-breadcrumb-item>
       </el-breadcrumb>
     </div>

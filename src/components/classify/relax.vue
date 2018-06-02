@@ -78,7 +78,7 @@
     },
     methods: {
       handleEdit(id){
-        this.$router.push('/nutmod?id=' + id)
+        this.$router.push('/relaxmod?id=' + id)
       },
       handleDelete(id){
         this.$http.get('/api/admin/goods/del?id=' + id).then(res => {

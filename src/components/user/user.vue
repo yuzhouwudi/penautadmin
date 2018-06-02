@@ -8,8 +8,8 @@
       :default-sort = "{prop: 'date', order: 'descending'}"
     >
       <el-table-column
-        prop="account"
-        label="账号"
+        prop="phone"
+        label="手机号"
         sortable
         width="180"
       >
